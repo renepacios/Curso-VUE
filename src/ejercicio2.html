@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <script>
+
+        Vue.component('todo-add', {
+            template: `
+                    <div>
+                        <input type="text" v-model="title" />
+                        <button @click="onClick">Añadir</button>
+                    </div>
+                    `
+            ,
+            data: function () {
+                return { title: null }
+            }
+            ,
+            methods: {
+                onClick: function () {
+                    console.log(this.title);
+                    this.$emit('pepito', { title: this.title });
+                    this.title='';
+                    
+                }
+            }
+        });
+
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: `<li>{{ todo.title }}</li> `
+        })
+
+        Vue.component('todo-list', {
+            props: ['todos'],
+            template: `
+                    <ul>
+                    <todo-item v-for="(todo,index) in todos"
+                    :todo="todo"
+                    :key="index">
+                    </todo-item>
+                    </ul>
+                    `
+        });
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                todos: [
+                    { title: 'Tarea 1', completed: false },
+                    { title: 'Tarea 2', completed: false },
+                    { title: 'Tarea 3', completed: false }
+                ]
+            },
+            template: `
+            <div>
+            <todo-list :todos="todos"></todo-list>
+            <todo-add @pepito="addNewTodo"></todo-add>
+            </div>
+            `
+            ,
+            methods: {
+                addNewTodo: function (todoData) {
+                    console.log('llegó ', todoData);
+                    this.todos.push(todoData);
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>

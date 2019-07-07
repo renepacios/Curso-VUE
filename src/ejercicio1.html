@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <movie-card v-for="(movie,index) in movies" 
+        :key="index"
+        :title="movie.title"
+        :image="movie.image">
+
+        </movie-card>
+
+        <tv-show
+        v-for="(movie,index) in movies"
+        :key="index"
+        :name="movie.title"
+        :seasons="movie.seasons"
+        >
+        </tv-show>
+
+        <tv-show-list>
+            
+        </tv-show-list>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
