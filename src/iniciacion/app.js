@@ -1,4 +1,4 @@
-Vue.component("movie-card", {
+ Vue.component("movie-card", {
   props: ["image", "title"],
   template: `
         <div>
