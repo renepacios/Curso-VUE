@@ -1,14 +1,23 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/components/views/Home'
+/* eslint-disable semi */
+/* eslint-disable quotes */
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "@/components/views/Home";
+import Board from "@/components/views/Board";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: "/",
       component: Home
+    },
+    {
+      path: "/board/:id",
+      name: "board",
+      component: Board,
+      props: true
     }
   ]
-})
+});
