@@ -2,43 +2,47 @@
   <section>
     <h3>
       <span>My Boards</span>
-      ▸ {{ name }}
+      ▸ {{ name }} ({{id}})
     </h3>
     <input type="text" placeholder="Add a list..." v-model="listName" @keyup.enter="add()" />
     <!--
     <template v-if="fetchingData">
       <span>Loading...</span>
     </template>
--->
+    -->
 
     <div class="container">
-      <column
-        v-for="(list, index) in boardLists"
-        :key="index"
-        :listId="list.id"
-        :name="list.name">
-      </column>
+      <column v-for="(list, index) in boardLists" :key="index" :listId="list.id" :name="list.name"></column>
     </div>
   </section>
 </template>
 
 <script>
 // import { mapState, mapGetters, mapActions } from 'vuex'
-import Column from './Column'
+import Column from "@/components/Column";
 export default {
   name: "board",
-   components: { Column },
+  components: { Column },
   props: {
     name: String,
-    id: Number
+    id: String
   },
   data() {
     return {
-      listName: ""
+      listName: "",
+      boardLists: [
+        { id: "1", name: "Task List 1" },
+        { id: "2", name: "TaskList2" }
+      ]
     };
   },
   methods: {
-    add() {}
+    add() {
+      this.boardLists.push({
+        id: this.boardLists.length.toString(),
+        name: this.listName
+      });
+    }
   }
   // computed: {
   //   ...mapState([
