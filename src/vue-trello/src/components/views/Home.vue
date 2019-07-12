@@ -4,7 +4,7 @@
     <div class="boards-collection">
       <!-- <template v-if="fetchingData">
         <span>Loading...</span>
-      </template> -->
+      </template>-->
       <input type="text" placeholder="Add new board" v-model="boardName" @keyup.enter="add()" />
       <board-card v-for="(board, index) in boards" :key="index" :name="board.name" :id="board.id"></board-card>
     </div>
