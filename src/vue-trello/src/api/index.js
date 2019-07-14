@@ -5,6 +5,10 @@ const listsRef = db.ref("/lists");
 const tasksRef = db.ref("/tasks");
 
 export default {
+  getBoardsByUser(userId = 1) {
+    const query = boardsRef.orderByChild("owner").equalTo(userId);
+    return query.once("value");
+  },
   postBoard(name, owner = 1) {
     //crear un panel
     const id = boardsRef.push().key;
